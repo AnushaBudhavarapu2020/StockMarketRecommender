@@ -1,0 +1,12 @@
+.postCount label{
+    color: black;
+    font-weight: bold;
+    display: block;
+    width: auto;
+    float: left;
+}
+
+.postCount label .count{
+    color: black;
+
+}

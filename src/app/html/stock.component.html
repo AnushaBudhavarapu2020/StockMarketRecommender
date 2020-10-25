@@ -1,0 +1,42 @@
+<h4>Please select StockSymbol,SocialMediaType and TimeWindow to see recommendation.</h4>
+<div class="filter">
+    <div class="dropdown">
+        <button (click)="toggleDropDownVisibility('symbolDropDown')" class="dropbtn">Stock Symbol</button>
+        <div id="symbolDropDown" class="dropdown-content">
+            <input type="text" id="searchSymbolInput" placeholder="Search.." class="defaultInput searchInput" (keyup)="filterStocks()">
+            <ul class="dropList">
+                <li class="itemList" *ngFor="let symbol of stockSymbolList">
+                    <span id="{{symbol.Code}}" class="itemDetails" (click)="selectSymbol(symbol)">{{symbol.Code}}</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <span *ngIf="selectedStockSymbol()"
+        class="selectedValue">{{ 'You Selected SYMBOL:'+ selectedStockSymbol().Code + ' ' + selectedStockSymbol().Name}}</span>
+    <div class="dropdown">
+        <button (click)="toggleDropDownVisibility('socialDropDown')" class="dropbtn">Social Media</button>
+        <div id="socialDropDown" class="dropdown-content">
+            <ul class="dropList">
+                <li class="itemList" *ngFor="let social of socialMediaList">
+                    <span id="{{social}}" class="itemDetails" (click)="selectSocial(social)">{{social}}</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <span *ngIf="selectedSocialMedia()" class="selectedValue">{{'You Selected SocialMedia:'+selectedSocialMedia()}}</span>
+    <div class="dateSelection">
+        <div>
+            <label for="dateStart">Start date</label>
+            <input class="inputDateSelector" type="date" name="dateStart" id="dateStart"
+                [value]="startDate() | date:'yyyy-MM-dd'" (input)="setStart($event.target.value)">
+        </div>
+        <div>
+            <label for="dateEnd">End date</label>
+            <input class="inputDateSelector" type="date" name="dateEnd" id="dateEnd"
+                [value]="endDate() | date:'yyyy-MM-dd'" (input)="setEnd($event.target.value)">
+        </div>
+    </div>
+</div>
+<social-count></social-count>
+<stock-prices></stock-prices>

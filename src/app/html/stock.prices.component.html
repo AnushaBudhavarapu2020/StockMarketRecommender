@@ -1,0 +1,29 @@
+<div *ngIf="dataLoaded()" class="stockValues">
+    <div class="filter">
+        <div class="dropdown">
+            <button (click)="toggleDropDownVisibility('algoDropDown')" class="dropbtn">Select Algorithm</button>
+            <div id="algoDropDown" class="dropdown-content">
+                <ul class="dropList">
+                    <li class="itemList" *ngFor="let algo of algoList">
+                        <span id="{{algo}}" class="itemDetails" (click)="selectAlgo(algo)">{{algo}}</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <span *ngIf="selectedAlgo()" class="selectedValue">{{selectedAlgo()}}</span>
+    </div>
+    <div>
+        <table style="width:50%">
+            <tr>
+                <th>Date</th>
+                <th>CloseValue</th>
+                <th>Recommendation</th>
+            </tr>
+            <tr *ngFor="let value of getValues()">
+                <td>{{value.Date | date:'yyyy-MM-dd'}}</td>
+                <td>{{value.CloseValue}}</td>
+                <td>{{value.Recommendation.status}}</td>
+            </tr>
+        </table>
+    </div>
+</div>
